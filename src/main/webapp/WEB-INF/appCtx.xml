@@ -4,6 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -12,6 +13,8 @@
        http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
        ">
 
 	<context:annotation-config />
@@ -29,14 +32,9 @@
 		<property name="username" value="app" />
 		<property name="password" value="123" />
 
-
-		<!-- 初始化连接大小 -->
 		<property name="initialSize" value="1" />
-		<!-- 连接池最大使用连接数量 -->
 		<property name="maxActive" value="20" />
-		<!-- 连接池最小空闲 -->
 		<property name="minIdle" value="1" />
-		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
 
 		<property name="validationQuery">
@@ -51,7 +49,6 @@
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 		<property name="minEvictableIdleTimeMillis" value="25200000" />
 
-		<!-- 打开removeAbandoned功能 -->
 		<property name="removeAbandoned" value="true" />
 		<!-- 1800秒，也就是30分钟 -->
 		<property name="removeAbandonedTimeout" value="1800" />
@@ -86,8 +83,8 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" 
-		proxy-target-class="true" />
+	<tx:annotation-driven
+		transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -103,5 +100,31 @@
 		<property name="basePackage" value="wsh.webapp.mapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+
+	<!-- MongoDB configuration -->
+	<mongo:mongo replica-set="127.0.0.1:27017">
+		<mongo:options
+			connections-per-host="8"
+			threads-allowed-to-block-for-connection-multiplier="4"
+			connect-timeout="1000"
+			max-wait-time="1500" 
+			auto-connect-retry="true"
+			socket-keep-alive="true" 
+			socket-timeout="1500"
+			slave-ok="true" 
+			write-number="1" 
+			write-timeout="0" 
+			write-fsync="true" />
+	</mongo:mongo>
+	 
+	<mongo:db-factory dbname="test" mongo-ref="mongo" />
+	
+	<bean id="MongoTemplate"
+		class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory"
+			ref="mongoDbFactory" />
+	</bean>
+
+
 
 </beans>  
