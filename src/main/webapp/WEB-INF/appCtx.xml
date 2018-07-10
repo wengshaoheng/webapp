@@ -19,7 +19,7 @@
 
 	<context:annotation-config />
 	<context:component-scan
-		base-package="wsh.webapp.service,wsh.webapp.mapper,wsh.webapp.controller,wsh.webapp.config" />
+		base-package="wsh.webapp.service,wsh.webapp.mapper,wsh.webapp.controller,wsh.webapp.config,wsh.webapp.dao" />
 	<aop:aspectj-autoproxy />
 
 	<!-- 数据源 org.apache.commons.dbcp.BasicDataSource com.alibaba.druid.pool.DruidDataSource -->
@@ -124,7 +124,4 @@
 		<constructor-arg name="mongoDbFactory"
 			ref="mongoDbFactory" />
 	</bean>
-
-
-
 </beans>  
