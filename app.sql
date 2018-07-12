@@ -46,19 +46,5 @@ create table t_role (
 	roledesc varchar(45) not null,
 	
 );
-
-drop table if exists t_auth_log;
-
-create table if not exists t_auth_log (
-	id bigint not null auto_increment,
-	factory_id varchar(10),
-	device_serial varchar(60),
-	auth_type varchar(2) not null,
-	auth_time timestamp not null,
-	is_legal varchar(1) not null,
-	remark varchar(60),
-	primary key(id)
-)engine=InnoDB default charset=utf8;
-
 select * from t_auth_log;
 
