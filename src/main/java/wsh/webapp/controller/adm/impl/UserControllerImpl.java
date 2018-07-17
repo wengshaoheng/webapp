@@ -1,27 +1,31 @@
 package wsh.webapp.controller.adm.impl;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import wsh.webapp.controller.AbstractBizController;
+import wsh.webapp.controller.IBizController;
 import wsh.webapp.controller.adm.IUserController;
+import wsh.webapp.service.IBaseBizService;
 
 @Controller
-public class UserControllerImpl implements IUserController {
+@RequestMapping("/admin/user")
+public class UserControllerImpl extends AbstractBizController implements IUserController, IBizController {
+
+	
+	@Override
+	protected <User> void doValidate(String action, User params) {
+		
+	}
 
 	@Override
-	public <User> ModelAndView doInit(User paramObj) {
+	protected IBaseBizService getService() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T> ModelAndView doCfm(T paramObj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> ModelAndView doAck(T paramObj) {
+	protected String getResultView(String action) {
 		// TODO Auto-generated method stub
 		return null;
 	}
