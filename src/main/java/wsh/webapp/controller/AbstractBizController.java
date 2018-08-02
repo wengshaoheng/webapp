@@ -18,7 +18,7 @@ public abstract class AbstractBizController implements IBizController {
 	}
 
 	@Override
-	public <T> String doCfm(String action, T paramObj, ModelMap mm) {
+	public <T> String doConfirm(String action, T paramObj, ModelMap mm) {
 		//validate the input parameters
 		doValidate(action, paramObj);
 		

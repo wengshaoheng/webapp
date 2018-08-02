@@ -37,7 +37,7 @@ public interface IBizController {
 	 * @return the model and view object
 	 */
 	@PostMapping("/doCfm/{action}")
-	<T> String doCfm(@PathVariable("action") String action, T paramObj, ModelMap mm);
+	<T> String doConfirm(@PathVariable("action") String action, T paramObj, ModelMap mm);
 	
 	/**
 	 * link for acknowledgment, call this link to show the transaction result to the user

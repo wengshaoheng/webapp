@@ -1,9 +1,9 @@
-package wsh.webapp.pojo.adm;
+package wsh.webapp.po.adm;
 
 import java.util.Date;
 
 public class User {
-	private int uid;
+	private int id;
 	private String loginId;
 	private String password;
 	private String username;
@@ -17,12 +17,12 @@ public class User {
 	private String lastUpdUser;
 	private Date lastUpdDate;
 
-	public int getUid() {
-		return uid;
+	public int getId() {
+		return id;
 	}
 
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setId(int uid) {
+		this.id = uid;
 	}
 
 	public String getLoginId() {
